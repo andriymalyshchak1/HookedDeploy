@@ -69,7 +69,7 @@ def get_gemini_response(file_path_pdf, user_query):
         # Return the output
         return model_output.text
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', template_folder='templates')
 
 @app.route('/')
 def index():
