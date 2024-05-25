@@ -82,6 +82,6 @@ def hello():
     message = get_gemini_response(file_path_pdf, first_name)
     return jsonify(message=message)
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5500, debug=True)
+#if __name__ == '__main__':
+    #app.run(host='0.0.0.0', port=5500, debug=True)
 
