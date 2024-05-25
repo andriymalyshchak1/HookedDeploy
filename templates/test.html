@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='test.css') }}">
+    <title>HookedGPT</title>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='assets/lol.jpeg') }}" alt="Sample Image" style="width: 200px; height: auto;">
+            <h1>HookedGPT</h1>
+        </div>
+
+        <div class="search-bar">
+            <form id="myForm" method="post">
+                <input type="text" id="search-input" name="first_name" placeholder="I want to learn more about...🤠">
+                <input type="submit" id="submit-button" value="Generate">
+            </form>
+        </div>
+
+        <div id="result"></div>
+
+        <div class="bottom-text">
+            <p>Made with ❤️ in ATX</p>
+            <p><a href="mailto:andriy_malyshchak@utexas.edu">andriy_malyshchak@utexas.edu</a></p>
+        </div>
+
+        <script>
+            document.getElementById('myForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the form from submitting the traditional way
+
+                const formData = new FormData(this);
+
+                fetch('/hello', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    startTextAnimation(data.message);
+                })
+                .catch(error => console.error('Error:', error));
+            });
+
+            function typeWriter(text, i, fnCallback) {
+                if (i < text.length) {
+                    document.getElementById("result").innerHTML = text.substring(0, i+1) +'<span aria-hidden="true"></span>';
+                    setTimeout(function() {
+                        typeWriter(text, i + 1, fnCallback)
+                    }, 50);
+                } else if (typeof fnCallback == 'function') {
+                    setTimeout(fnCallback, 700);
+                }
+            }
+
+            function startTextAnimation(text) {
+                typeWriter(text, 0);
+            }
+        </script>
+    </div>
+</body>
+</html>
+

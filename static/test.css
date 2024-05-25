@@ -1,0 +1,114 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+    
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    
+}
+
+.logo {
+    margin-bottom: 20px;
+    color: chocolate;
+    font-size: xx-large;
+}
+
+.search-bar {
+    width: 100%; /* Ensure the search bar container takes full width */
+    display: flex;
+    justify-content: center; /* Center the input horizontally */
+    margin-bottom: 20px;
+}
+.output-bar{
+    width: 100%; /* Ensure the search bar container takes full width */
+    display: flex;
+    justify-content: center; /* Center the input horizontally */
+    margin-bottom: 20px;
+}
+
+#search-input {
+    width: 100%; /* Set width to 100% of its parent container */
+    max-width: 1000px; /* Set a max width */
+    padding: 20px; /* Increase padding for a bigger input field */
+    font-size: 18px; /* Adjust font size */
+    border: 1px solid #ccc;
+    border-radius: 24px;
+    outline: none;
+    box-sizing: border-box;
+}
+#result {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 20px;
+    max-width: 100%;  /* Ensure the width is responsive */
+    font-size: 16px;
+    color: #333;
+    background-color: #f9f9f9;
+    border-radius: 10px;  /* Rounded corners */
+    display: inline-block;  /* Adjusts to the size of the content */
+    word-wrap: break-word;  /* Ensures long words are wrapped */
+}
+#search-output{
+    width: 100%; /* Set a fixed width in percentage */
+    max-width: 800px;
+    padding: 90px; /* Increase padding for a bigger input field */
+    font-size: 18px; /* Adjust font size */
+    border: 1px solid #ccc;
+    border-radius: 24px;
+    outline: none;
+    background-color: white; /* Set white background */
+    color: #000000; 
+}
+
+#search-input:focus {
+    border-color: #007BFF;
+}
+
+.extra-content {
+    margin-top: 20px;
+}
+
+.extra-content p {
+    margin-bottom: 10px;
+}
+
+.extra-content img {
+    max-width: 100px;
+    height: auto;
+}
+.bottom-text{
+    position: fixed;
+    bottom: 0;
+}
+.submit-button {
+    width: 100%; /* Make the button take the full width of the container */
+    max-width: 200px; /* Set a maximum width for the button */
+    padding: 15px; /* Increase padding for a bigger button */
+    font-size: 18px; /* Adjust font size */
+    border: none; /* Remove default border */
+    border-radius: 24px; /* Add rounded corners */
+    outline: none; /* Remove outline */
+    background-color: #4CAF50; /* Set background color */
+    color: white; /* Set text color */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
