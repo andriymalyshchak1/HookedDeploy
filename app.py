@@ -1,5 +1,4 @@
-import warnings
-warnings.filterwarnings("ignore", category=FutureWarning, module="huggingface_hub.file_download")
+
 
 
 from flask import Flask, render_template, request, jsonify
