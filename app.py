@@ -1,6 +1,3 @@
-
-
-
 from flask import Flask, render_template, request, jsonify
 import os
 from dotenv import load_dotenv
@@ -8,7 +5,6 @@ import google.generativeai as genai
 import numpy as np
 from sentence_transformers import SentenceTransformer
 import PyPDF2
-import concurrent.futures
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
 
@@ -65,7 +61,8 @@ def get_gemini_response(file_path_pdf, user_query):
         generation_config=generation_config,
     )
 
-    def process_query(query_vec):
+    # Step 5: Get the result
+    for i, query_vec in enumerate(embedded_queries):
         # Compute similarities
         similarities = cosine_similarity(query_vec[np.newaxis, :], embedded_data)
         
@@ -74,18 +71,13 @@ def get_gemini_response(file_path_pdf, user_query):
         top_docs = [pdf_text for _ in range(len(top_indices))]
         
         # Create the augmented prompt
-        augmented_prompt = f"You are an expert question answering system designed to help people learn more about the University of Texas. I'll give you a question and context based on UT history and you'll return the answer. Use an easy Texan drawl accent when answering questions. Keep the responses on the shorter side especially if including texas jokes or something like that. Query: {queries[0]} Contexts: {top_docs[0]}"
+        augmented_prompt = f"You are an expert question answering system designed to help people learn more about the University of Texas. I'll give you a question and context based on UT history and you'll return the answer. Use an easy Texan drawl accent when answering questions. Keep the responses on the shorter side especially if including texas jokes or something like that. Query: {queries[i]} Contexts: {top_docs[0]}"
         
         # Generate the model output
         model_output = Gemini.generate_content(augmented_prompt)
         
+        # Return the output
         return model_output.text
-
-    with concurrent.futures.ThreadPoolExecutor() as executor:
-        futures = [executor.submit(process_query, query_vec) for query_vec in embedded_queries]
-        results = [future.result() for future in futures]
-    
-    return results[0]
 
 @app.route('/')
 def index():
@@ -100,6 +92,7 @@ def hello():
 
 #if __name__ == '__main__':
     #app.run(host='0.0.0.0', port=5500, debug=True)
+
 
 
 

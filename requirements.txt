@@ -7,4 +7,4 @@ PyPDF2
 python-dotenv
 sentence_transformers
 google.generativeai
-concurrent.futures
+
